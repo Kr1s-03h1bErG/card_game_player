@@ -1,4 +1,4 @@
-from functions import get_cards, get_deck, shuffle, get_response, give_hand
+from functions import get_cards, get_deck, shuffle, get_response, move_cards ,get_url_response, get_pile_cards, list_pile_cards
 # this function needs to change later just ported over from API Projcect 
 # this is outdated just rements of copying api project 
 def main():
@@ -35,54 +35,52 @@ def main():
             input("type anything to continue")
             for i in range(10):
                 print("")
-# goal is to try to login a user and if they cant see if they need to register
-def register():
-    pass
+
+
+
 # checks if user is in db returns Bool
-def is_user_in_user(username, password)
+def is_user_in_user(username, password):
     user_data = username + "," + password
     with open("user.txt", "r") as file:
         for line_number, line in enumerate(file, 1): # starts numbering at 1
             if user_data in line:
                 return True
         return False
-
 # def pull_user_data()
 #checks Returns if it succeeded or failed (bool)
 def login():
-    need_login = get_response("Do you need to login? Y/N: ")
-    if need_login:
-        username = get_response("What is your Username?: ")
-        password = get_response("What is your Password?: ")
-        return is_user_in_user(username, password)
-    else: # return that it failed to login so we can register later
-        print("Failed to find name in db")
-        return False
+    while True:
+        need_login = get_response("Do you need to login? Y/N: ")
+        if need_login:
+            username = get_response("What is your Username?: ")
+            password = get_response("What is your Password?: ")
+            return is_user_in_user(username, password)
+        else: # return that it failed to login so we can register later
+            print("Failed to find name in db/user didn't need to")
+            return False
 #Returns suceeded or failed (bool)
 def add_user(username, password):
     with open("user.txt", "a") as file:
-        file.write(f"{username},{password}::\n")
+        file.write(f"\n{username},{password}::")
         return True
-
-def register()
+# this returns if it registered sucessfuly as a
+def register():
     need_register = get_response("Do you need to register? Y/N: ")
+    while True:
         if need_register:
-            while True:
-                username = get_response("What will be your Username?: ")
-                password = get_response("What will be your Password?: ")
-                if is_user_in_user(username, password):
-                    print("username and password already in db restarting register")
-                else:
-                    break
-            return add_user(username, password)
-            
+            username = get_response("What will be your Username?: ")
+            password = get_response("What will be your Password?: ")
+            if is_user_in_user(username, password):
+                print("username and password already in db restarting register")
+            else:
+                return add_user(username, password) 
         else: # return that it failed to login so we can register later
-            print("User Didn't need to register for new account")
+            print("User Didn't need to register for new account! ")
             return False
-
-
-
-# r = get_response("r: ")
-# print(r)
-# print(type(r))
+#should pull all the data associated with user into a useable dict 
+# mainly game id's owned and player positions in games like 1-7
+#returns dict of player data
+def get_player_data(username, password):
+    pass
+login()
 

@@ -1,2 +1,3 @@
 name,password:game_id 1-... :player_in_game 1-7
 kris,kris123:1:1
+notkris,alsonotkris::
